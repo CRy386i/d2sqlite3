@@ -125,6 +125,11 @@ public:
     +/
     this(string path, int flags = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
     {
+        cRun(path, flags);
+    }
+
+    void cRun(string path, int flags = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+    {
         sqlite3* hdl;
         auto result = sqlite3_open_v2(path.toStringz, &hdl, flags, null);
         enforce(result == SQLITE_OK, new SqliteException(hdl ? errmsg(hdl) : "Error opening the database", result));
